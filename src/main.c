@@ -95,7 +95,34 @@ int main(int argc, char const *argv[]) {
     }
     fclose(file);
 
-    sort_bubble(arr, line_count, compare_asc);
+    const char *AvaiableOptions[] = {"bubble", "insertion", "merge", "quick", "radix"};
+    if (strcmp(argv[3], "bubble") == 0) {
+        if (strcmp(argv[4], "asc") == 0)
+            sort_bubble(arr, line_count, compare_asc);
+        else
+            sort_bubble(arr, line_count, compare_des);
+    } else if (strcmp(argv[3], "insertion") == 0) {
+        if (strcmp(argv[4], "asc") == 0)
+            sort_insertion(arr, line_count, compare_asc);
+        else
+            sort_insertion(arr, line_count, compare_des);
+    } else if (strcmp(argv[3], "merge") == 0) {
+        if (strcmp(argv[4], "asc") == 0)
+            sort_merge(arr, line_count, compare_asc);
+        else
+            sort_merge(arr, line_count, compare_des);
+    } /* else if (strcmp(argv[3], "quick") == 0) {
+        if (strcmp(argv[4], "asc") == 0)
+            sort_quick(arr, line_count, compare_asc);
+        else
+            sort_quick(arr, line_count, compare_des);
+    } else if (strcmp(argv[3], "radix") == 0) {
+        if (strcmp(argv[4], "asc") == 0)
+            sort_radix(arr, line_count, compare_asc);
+        else
+            sort_radix(arr, line_count, compare_des);
+    } */
+
     for (size_t i = 0; i < line_count; i++) {
         printf("%s\n", arr[i]);
     }
