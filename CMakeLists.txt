@@ -3,6 +3,7 @@ project(sort_strings LANGUAGES C)
 
 set(CMAKE_C_STANDARD 99)
 
+enable_testing()
 
 option(USE_MMAP "Use memory-mapped file I/O" OFF)
 
@@ -34,5 +35,15 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 add_custom_target(clean-build
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}
-    COMMENT "Очистка директории build"
+    COMMENT "cleaning build"
+)
+add_test(NAME test_sort_strings_1
+    COMMAND bash -c "./sort_strings 5 ${CMAKE_SOURCE_DIR}/test/1.in bubble asc > ${CMAKE_BINARY_DIR}/1.out && ${CMAKE_COMMAND} -E compare_files ${CMAKE_SOURCE_DIR}/test/1_asc_expected.out ${CMAKE_BINARY_DIR}/1.out"
+)
+
+# Добавляем кастомную цель для сборки и запуска тестов
+add_custom_target(run_all_tests
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Running all tests"
 )

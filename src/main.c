@@ -44,7 +44,6 @@ int check_cmd_args(int argc, char const *argv[]) {
 }
 
 int main(int argc, char const *argv[]) {
-    printf("wc -l example.txt\n");
 
     int result_of_checking = check_cmd_args(argc, argv);
     if (result_of_checking == ERREXCODE) {
