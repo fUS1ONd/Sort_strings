@@ -17,7 +17,8 @@ int check_cmd_args(int argc, char const *argv[]) {
         return ERREXCODE;
     }
 
-    if (argv[1] < 0) {
+    char *end;
+    if ((strtol(argv[1], &end, 10) <= 0) || !(*argv[1] != '\0' && *end == '\0')) {
         fprintf(stderr, "Incorrect parameter of number of lines\n");
         return ERREXCODE;
     }
@@ -52,8 +53,8 @@ int check_cmd_args(int argc, char const *argv[]) {
 int main(int argc, char const *argv[]) {
     printf("wc -l example.txt\n");
 
-    int resultOfChecking = check_cmd_args(argc, argv);
-    if (resultOfChecking == ERREXCODE) {
+    int result_of_checking = check_cmd_args(argc, argv);
+    if (result_of_checking == ERREXCODE) {
         return ERREXCODE;
     }
 
