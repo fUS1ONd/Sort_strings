@@ -23,13 +23,6 @@ int check_cmd_args(int argc, char const *argv[]) {
         return ERREXCODE;
     }
 
-    const char *filename = argv[2];
-    int len = strlen(filename);
-    if (len <= 4 || strcmp(filename + len - 4, ".txt") != 0) {
-        fprintf(stderr, "Incorrect parameter of filename\n");
-        return ERREXCODE;
-    }
-
     const char *AvaiableOptions[] = {"bubble", "insertion", "merge", "quick", "radix"};
     int size = sizeof(AvaiableOptions) / sizeof(AvaiableOptions[0]);
     int cntFails = 0;
@@ -66,7 +59,6 @@ int main(int argc, char const *argv[]) {
         return ERREXCODE;
     }
 
-    const char *AvaiableOptions[] = {"bubble", "insertion", "merge", "quick", "radix"};
     if (strcmp(argv[3], "bubble") == 0) {
         if (strcmp(argv[4], "asc") == 0)
             sort_bubble(arr, line_count, compare_asc);

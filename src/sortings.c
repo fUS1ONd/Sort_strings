@@ -114,6 +114,20 @@ void sort_quick(char **arr, size_t size, int (*comparator)(const char *, const c
     }
 }
 
+void reverse_string_array(char *arr[], int size) {
+    int i = 0;
+    int j = size - 1;
+
+    while (i < j) {
+        char *temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+
+        i++;
+        j--;
+    }
+}
+
 size_t get_max_length(char **arr, size_t size) {
     size_t max_len = 0;
     for (size_t i = 0; i < size; i++) {
@@ -166,6 +180,12 @@ void sort_radix(char **arr, size_t size, int (*comparator)(const char *, const c
         for (size_t i = 0; i < size; ++i) {
             arr[i] = output[i];
         }
+    }
+
+    char *a = "a";
+    char *b = "b";
+    if (comparator(a, b) > 0) {
+        reverse_string_array(arr, size);
     }
 
     free(output);
