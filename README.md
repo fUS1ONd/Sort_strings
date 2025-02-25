@@ -2,9 +2,9 @@
 The sort_strings utility is designed to sort strings in a file and output them to standard output
 
 ## Features
-The utility supports two types of working with a file:
-• Via File I/O API
-• Through file mapping into memory
+The utility supports two types of working with a file:  
+• Via File I/O API  
+• Through file mapping into memory  
 Also supports 5 types of sortings: `bubble`, `merge`, `insertion`, `radix` and `quick`
 At least supports sorting in ascending(`asc`) and descending order(`des`)
 
