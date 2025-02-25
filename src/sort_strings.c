@@ -10,7 +10,7 @@
 
 #define MAX_LINE_LENGTH 1000
 
-/* usage : sort_strings num_of_str's input.txt sort comparer */
+/* usage : ./sort_strings number_of_str's input.in option_sorting comparator */
 int check_cmd_args(int argc, char const *argv[]) {
     if (argc != 5) {
         fprintf(stderr, "Incorrect number of parameters:\nusage : sort_strings num_of_str's "
