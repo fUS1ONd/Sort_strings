@@ -13,7 +13,8 @@
 /* usage : sort_strings num_of_str's input.txt sort comparer */
 int check_cmd_args(int argc, char const *argv[]) {
     if (argc != 5) {
-        fprintf(stderr, "Incorrect number of parameters\n");
+        fprintf(stderr, "Incorrect number of parameters:\nusage : sort_strings num_of_str's "
+                        "input.txt sort comparer\n");
         return ERREXCODE;
     }
 
