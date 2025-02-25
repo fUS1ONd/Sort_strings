@@ -14,7 +14,7 @@ To find out how many lines are in a file you can use:
 2. in windows: `(Get-Content C:\inputfile.in).Length`
 
 ## Usage
-common use:
+common use:  
    `./sort_strings number_of_str's input.in option_sorting comparator`
 
 This project has the ability to automatically build and test, implemented using CMake and CTest  
@@ -24,7 +24,7 @@ To build project(and configure the type of working with file), test and clean mu
 2. if you want to configure util with Map type use:
    `cmake -B build -DUSE_MMAP=ON` and `cmake --build build`
    or do not specify the parameter
-   then you can find in `build/` executable file to use according to the usage or
+   Then you can find in `build/` executable file to use according to the usage or
 4. Run tests with:
    `cmake --build build --target run_all_tests`
 
