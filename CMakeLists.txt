@@ -124,6 +124,12 @@ foreach(input_file ${input_files})
     endforeach()
 endforeach()
 
+add_test(
+    NAME test_comp_des
+    COMMAND bash -c "./sort_strings 5 ${CMAKE_SOURCE_DIR}/test/input/1.in bubble des > ${CMAKE_BINARY_DIR}/${test_name}.out && cmp ${CMAKE_BINARY_DIR}/${test_name}.out ${CMAKE_SOURCE_DIR}/test/descending_output/1.out"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
 add_custom_target(run_all_tests
     COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
