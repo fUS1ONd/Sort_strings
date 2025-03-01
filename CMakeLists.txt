@@ -90,10 +90,10 @@ endfunction(add_invalid_parameters_tests)
 
 add_invalid_parameters_tests()
 
-function(add_sort_test input_file algorithm expected_output)
+function(add_sort_test num_of_str input_file algorithm expected_output)
     get_filename_component(test_name ${input_file} NAME_WE)
 
-    set(run_program_cmd "./sort_strings 5 ${input_file} ${algorithm} asc > ${CMAKE_BINARY_DIR}/${test_name}_${algorithm}.out")
+    set(run_program_cmd "./sort_strings ${num_of_str} ${input_file} ${algorithm} asc > ${CMAKE_BINARY_DIR}/${test_name}_${algorithm}.out")
     
     set(compare_cmd "cmp ${CMAKE_BINARY_DIR}/${test_name}_${algorithm}.out ${expected_output}")
 
@@ -112,9 +112,15 @@ endfunction()
 file(GLOB input_files "${CMAKE_SOURCE_DIR}/test/input/*.in")
 foreach(input_file ${input_files})
     get_filename_component(test_name ${input_file} NAME_WE)
+    execute_process(
+        COMMAND wc -l ${input_file}
+        OUTPUT_VARIABLE num_of_str
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    string(REGEX REPLACE "^[ ]*([0-9]+).*" "\\1" num_of_str "${num_of_str}")
     foreach(algorithm ${ALGORITHMS})
         set(expected_output "${CMAKE_SOURCE_DIR}/test/output/${test_name}.out")
-        add_sort_test(${input_file} ${algorithm} ${expected_output})
+        add_sort_test(${num_of_str} ${input_file} ${algorithm} ${expected_output})
     endforeach()
 endforeach()
 
