@@ -24,15 +24,16 @@ int check_cmd_args(int argc, char const *argv[]) {
         return ERREXCODE;
     }
 
-    const char *AvaiableOptions[] = {"bubble", "insertion", "merge", "quick", "radix"};
-    int size = sizeof(AvaiableOptions) / sizeof(AvaiableOptions[0]);
-    int cntFails = 0;
-    for (int i = 0; i < size; ++i) {
-        if (strcmp(argv[3], AvaiableOptions[i]) == 0)
+    const char *avaiable_options[] = {"bubble", "insertion", "merge", "quick", "radix"};
+
+    size_t size = sizeof(avaiable_options) / sizeof(avaiable_options[0]);
+    size_t cnt_fails = 0;
+    for (size_t i = 0; i < size; ++i) {
+        if (strcmp(argv[3], avaiable_options[i]) == 0)
             break;
-        cntFails += (strcmp(argv[3], AvaiableOptions[i]) != 0) ? 1 : 0;
+        cnt_fails += (strcmp(argv[3], avaiable_options[i]) != 0) ? 1 : 0;
     }
-    if (cntFails == 5) {
+    if (cnt_fails == 5) {
         fprintf(stderr, "Incorrect parameter of type of sorting\n");
         return ERREXCODE;
     }
@@ -41,55 +42,56 @@ int check_cmd_args(int argc, char const *argv[]) {
         fprintf(stderr, "Incorrect comparer parameter\n");
         return ERREXCODE;
     }
+
     return 0;
 }
 
 int main(int argc, char const *argv[]) {
 
-    int result_of_checking = check_cmd_args(argc, argv);
+    __ssize_t result_of_checking = check_cmd_args(argc, argv);
     if (result_of_checking == ERREXCODE) {
         return ERREXCODE;
     }
 
     const char *filename = argv[2];
     size_t line_count = atoi(argv[1]);
-    char **arr = read_file(filename, line_count);
-    if (!arr) {
+    char **array_of_strings = read_file(filename, line_count);
+    if (!array_of_strings) {
         fprintf(stderr, "Can't open file\n");
         return ERREXCODE;
     }
 
     if (strcmp(argv[3], "bubble") == 0) {
         if (strcmp(argv[4], "asc") == 0)
-            sort_bubble(arr, line_count, compare_asc);
+            sort_bubble(array_of_strings, line_count, compare_asc);
         else
-            sort_bubble(arr, line_count, compare_des);
+            sort_bubble(array_of_strings, line_count, compare_des);
     } else if (strcmp(argv[3], "insertion") == 0) {
         if (strcmp(argv[4], "asc") == 0)
-            sort_insertion(arr, line_count, compare_asc);
+            sort_insertion(array_of_strings, line_count, compare_asc);
         else
-            sort_insertion(arr, line_count, compare_des);
+            sort_insertion(array_of_strings, line_count, compare_des);
     } else if (strcmp(argv[3], "merge") == 0) {
         if (strcmp(argv[4], "asc") == 0)
-            sort_merge(arr, line_count, compare_asc);
+            sort_merge(array_of_strings, line_count, compare_asc);
         else
-            sort_merge(arr, line_count, compare_des);
+            sort_merge(array_of_strings, line_count, compare_des);
     } else if (strcmp(argv[3], "quick") == 0) {
         if (strcmp(argv[4], "asc") == 0)
-            sort_quick(arr, line_count, compare_asc);
+            sort_quick(array_of_strings, line_count, compare_asc);
         else
-            sort_quick(arr, line_count, compare_des);
+            sort_quick(array_of_strings, line_count, compare_des);
     } else if (strcmp(argv[3], "radix") == 0) {
         if (strcmp(argv[4], "asc") == 0)
-            sort_radix(arr, line_count, compare_asc);
+            sort_radix(array_of_strings, line_count, compare_asc);
         else
-            sort_radix(arr, line_count, compare_des);
+            sort_radix(array_of_strings, line_count, compare_des);
     }
 
     for (size_t i = 0; i < line_count; i++) {
-        printf("%s\n", arr[i]);
+        printf("%s\n", array_of_strings[i]);
     }
 
-    free_file_content(arr, line_count);
+    free_file_content(array_of_strings, line_count);
     return 0;
 }

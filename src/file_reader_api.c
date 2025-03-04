@@ -23,13 +23,13 @@ size_t count_lines_in_file(const char *filename) {
     return line_count;
 }
 
-char **read_file(const char *filename, size_t line_count) {
-    size_t actual_line_count = count_lines_in_file(filename);
-    if (actual_line_count == 0) {
+char **read_file(const char *filename, size_t line_counted) {
+    size_t counter_of_lines = count_lines_in_file(filename);
+    if (counter_of_lines == 0) {
         return NULL;
     }
 
-    if (actual_line_count < line_count) {
+    if (counter_of_lines < line_counted) {
         fprintf(stderr, "There are fewer lines in the file than you entered");
         return NULL;
     }
@@ -40,8 +40,8 @@ char **read_file(const char *filename, size_t line_count) {
         return NULL;
     }
 
-    char **arr = (char **)malloc(line_count * sizeof(char *));
-    if (!arr) {
+    char **array_of_strings = (char **)malloc(line_counted * sizeof(char *));
+    if (!array_of_strings) {
         fprintf(stderr, "Allocation failed\n");
         fclose(file);
         return NULL;
@@ -51,27 +51,27 @@ char **read_file(const char *filename, size_t line_count) {
     size_t index = 0;
     while (fgets(buffer, sizeof(buffer), file)) {
         buffer[strcspn(buffer, "\n")] = '\0';
-        arr[index] = strdup(buffer);
-        if (!arr[index]) {
+        array_of_strings[index] = strdup(buffer);
+        if (!array_of_strings[index]) {
             fprintf(stderr, "Allocation failed\n");
             fclose(file);
             for (size_t i = 0; i < index; i++)
-                free(arr[i]);
-            free(arr);
+                free(array_of_strings[i]);
+            free(array_of_strings);
             return NULL;
         }
         index++;
-        if (index == line_count) {
+        if (index == line_counted) {
             break;
         }
     }
     fclose(file);
-    return arr;
+    return array_of_strings;
 }
 
-void free_file_content(char **arr, size_t line_count) {
-    for (size_t i = 0; i < line_count; i++) {
-        free(arr[i]);
+void free_file_content(char **array_of_strings, size_t line_counted) {
+    for (size_t i = 0; i < line_counted; i++) {
+        free(array_of_strings[i]);
     }
-    free(arr);
+    free(array_of_strings);
 }

@@ -11,7 +11,9 @@ At least supports sorting in ascending(`asc`) and descending order(`des`)
 The parameter for the number of rows to sort in [1:MaxNumOfLinesInFile]  
 To find out how many lines are in a file you can use:
 1. in linux: `wc -l inputfile.in`
-2. in windows: `(Get-Content C:\inputfile.in).Length`
+2. in windows: `(Get-Content C:\inputfile.in).Length`  
+
+! Line output is limited to thousands of characters !
 
 ## Usage
 common use:  
