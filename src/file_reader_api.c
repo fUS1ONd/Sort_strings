@@ -30,7 +30,7 @@ char **read_file(const char *filename, size_t line_counted) {
     }
 
     if (counter_of_lines < line_counted) {
-        fprintf(stderr, "There are fewer lines in the file than you entered");
+        fprintf(stderr, "There are fewer lines in the file than you entered\n");
         return NULL;
     }
 

@@ -10,11 +10,11 @@
 
 #define MAX_LINE_LENGTH 1000
 
-/* usage : ./sort_strings number_of_str's input.in option_sorting comparator */
+/* usage : ./sort_strings <number_of_str's> <input.in> <option_sorting> <comparator> */
 int check_cmd_args(int argc, char const *argv[]) {
     if (argc != 5) {
-        fprintf(stderr, "Incorrect number of parameters:\nusage : sort_strings num_of_str's "
-                        "input.txt sort comparer\n");
+        fprintf(stderr, "Incorrect number of parameters:\nusage : ./sort_strings <number_of_str's>"
+                        " <input.in> <option_sorting> <comparator>\n");
         return ERREXCODE;
     }
 
@@ -48,7 +48,7 @@ int check_cmd_args(int argc, char const *argv[]) {
 
 int main(int argc, char const *argv[]) {
 
-    __ssize_t result_of_checking = check_cmd_args(argc, argv);
+    int result_of_checking = check_cmd_args(argc, argv);
     if (result_of_checking == ERREXCODE) {
         return ERREXCODE;
     }
