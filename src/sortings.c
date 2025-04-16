@@ -1,8 +1,15 @@
 #include "../include/sortings.h"
 #include "../include/comparators.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+void swap(char **a, char **b) {
+    char *temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 void sort_bubble(char **arr, size_t size, int (*comparator)(const char *, const char *)) {
     for (size_t i = 0; i < size - 1; ++i) {
@@ -22,8 +29,8 @@ void sort_insertion(char **arr, size_t size, int (*comparator)(const char *, con
     }
 }
 
-void merge(char **arr, size_t left, size_t mid, size_t right,
-           int (*comparator)(const char *, const char *)) {
+static void merge(char **arr, size_t left, size_t mid, size_t right,
+                  int (*comparator)(const char *, const char *)) {
     size_t n1 = mid - left + 1;
     size_t n2 = right - mid;
 
@@ -65,8 +72,8 @@ void merge(char **arr, size_t left, size_t mid, size_t right,
     free(R);
 }
 
-void merge_recursion(char **arr, size_t left, size_t right,
-                     int (*comparator)(const char *, const char *)) {
+static void merge_recursion(char **arr, size_t left, size_t right,
+                            int (*comparator)(const char *, const char *)) {
     if (left < right) {
         size_t mid = (right + left) / 2;
         merge_recursion(arr, left, mid, comparator);
@@ -81,8 +88,8 @@ void sort_merge(char **arr, size_t size, int (*comparator)(const char *, const c
     }
 }
 
-size_t partition(char **arr, size_t left, size_t right,
-                 int (*comparator)(const char *, const char *)) {
+static size_t partition(char **arr, size_t left, size_t right,
+                        int (*comparator)(const char *, const char *)) {
     char *pivot = arr[right];
     size_t i = left;
 
@@ -97,8 +104,8 @@ size_t partition(char **arr, size_t left, size_t right,
     return i;
 }
 
-void quick_recurion(char **arr, size_t left, size_t right,
-                    int (*comparator)(const char *, const char *)) {
+static void quick_recurion(char **arr, size_t left, size_t right,
+                           int (*comparator)(const char *, const char *)) {
     if (left < right) {
         size_t pivot = partition(arr, left, right, comparator);
         if (pivot > 0) {
@@ -114,7 +121,7 @@ void sort_quick(char **arr, size_t size, int (*comparator)(const char *, const c
     }
 }
 
-void reverse_string_array(char *arr[], int size) {
+static void reverse_string_array(char *arr[], int size) {
     int i = 0;
     int j = size - 1;
 
@@ -128,7 +135,7 @@ void reverse_string_array(char *arr[], int size) {
     }
 }
 
-size_t get_max_length(char **arr, size_t size) {
+static size_t get_max_length(char **arr, size_t size) {
     size_t max_len = 0;
     for (size_t i = 0; i < size; i++) {
         size_t len = strlen(arr[i]);
@@ -139,7 +146,7 @@ size_t get_max_length(char **arr, size_t size) {
     return max_len;
 }
 
-char get_char_at_pos(const char *str, size_t pos) {
+static char get_char_at_pos(const char *str, size_t pos) {
     if (pos < strlen(str)) {
         return str[pos];
     }
