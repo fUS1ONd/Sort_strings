@@ -18,6 +18,7 @@ int check_cmd_args(int argc, char const *argv[]) {
         return ERREXCODE;
     }
 
+    // TODO : Переписать шайтан машину
     char *end;
     if ((strtol(argv[1], &end, 10) <= 0) || !(*argv[1] != '\0' && *end == '\0')) {
         fprintf(stderr, "Incorrect parameter of number of lines\n");
@@ -48,6 +49,7 @@ int check_cmd_args(int argc, char const *argv[]) {
 
 int main(int argc, char const *argv[]) {
 
+    // TODO : Сделать так, чтобы состояние передавалось дальше
     int result_of_checking = check_cmd_args(argc, argv);
     if (result_of_checking == ERREXCODE) {
         return ERREXCODE;
@@ -61,6 +63,7 @@ int main(int argc, char const *argv[]) {
         return ERREXCODE;
     }
 
+    // TODO : Перепиши это убийство
     if (strcmp(argv[3], "bubble") == 0) {
         if (strcmp(argv[4], "asc") == 0)
             sort_bubble(array_of_strings, line_count, compare_asc);
